@@ -1,0 +1,15 @@
+<h1>Les maraudes disponibles</h1>
+
+  <% if @maraudes.any? %>
+    <ul>
+      <% @maraudes.each do |maraude| %>
+        <li><%= maraude.place %> - <%= maraude.action %> - <%= maraude.date %> à <%= maraude.hour.strftime("%H:%M") %> créer par <%= maraude.user.email %></li>
+    <% end %>
+    </ul>
+  <% else %>
+    <p>Aucune marraude disponible pour l'instant.</p>
+  <% end %>
+
+<%= link_to dashboard_path, class: "btn btn-primary mt-4", aria: { label: "Revenir à mon tableau de bord" } do %>
+  <i class="fas fa-home"></i>
+<% end %>

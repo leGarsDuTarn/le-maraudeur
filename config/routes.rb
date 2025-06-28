@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :maraudes do
     resources :participations, only: [:create, :destroy]
   end
+
+  get "dashboard", to: "pages#dashboard"
 end
