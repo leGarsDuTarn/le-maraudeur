@@ -7,7 +7,7 @@ class ParticipationsController < ApplicationController
     if @participation.save
       redirect_to dashboard_path, notice: "Votre participation a bien été prise en compte"
     else
-      redirect_to @maraude, alert: "Une erreur est survenue lors de votre participation."
+      redirect_to dashboard_path, alert: "Une erreur est survenue lors de votre participation."
     end
   end
 

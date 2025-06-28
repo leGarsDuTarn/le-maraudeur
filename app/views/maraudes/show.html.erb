@@ -11,7 +11,7 @@
 <p>Heure : <%= @maraude.hour.strftime("%H:%M") %></p>
 
 <h2>Les participants</h2>
-<% if @maraude.participations.any?(maraude: @maraude) %>
+<% if @maraude.participations.exists?(maraude: @maraude) %>
 <ul>
   <% @maraude.participations.each do |participate| %>
   <li><%= participate.user.email %></li>
@@ -22,7 +22,7 @@
 <% end %>
 
 <h2>Que voulez-vous faire ?</h2>
-<% if current_user.participations.any?(maraude: @maraude) %>
+<% if current_user.participations.exists?(maraude: @maraude) %>
   <%= link_to "Je ne participe plus", maraude_participation_path(@maraude, current_user.participations.find_by(maraude: @maraude)),
      data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" },
      class: "btn btn-danger" %>
