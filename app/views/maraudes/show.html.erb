@@ -1,5 +1,5 @@
 <h1><%= @maraude.place %></h1>
-<p>Maraude crée par <%= @maraude.user.email %></p>
+<p>Maraude crée par <%= @maraude.user.username %></p>
 
 <hr>
 
@@ -14,7 +14,7 @@
 <% if @maraude.participations.exists?(maraude: @maraude) %>
 <ul>
   <% @maraude.participations.each do |participate| %>
-  <li><%= participate.user.email %></li>
+  <li><%= participate.user.username %></li>
   <% end %>
 </ul>
 <% else %>
