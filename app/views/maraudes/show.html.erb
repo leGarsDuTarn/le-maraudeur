@@ -1,0 +1,38 @@
+<h1><%= @maraude.place %></h1>
+<p>Maraude crée par <%= @maraude.user.email %></p>
+
+<hr>
+
+<h2>Les objectifs pour cette maraude</h2>
+<p><%= @maraude.action %></p>
+
+<h2>Les infos à connaître</h2>
+<p>Date : <%= @maraude.date.strftime("%d/%m/%Y") %></p>
+<p>Heure : <%= @maraude.hour.strftime("%H:%M") %></p>
+
+<h2>Les participants</h2>
+<% if @maraude.participations.exists?(maraude: @maraude) %>
+<ul>
+  <% @maraude.participations.each do |participate| %>
+  <li><%= participate.user.email %></li>
+  <% end %>
+</ul>
+<% else %>
+<p>Aucun participants pour l'instant.</p>
+<% end %>
+
+<h2>Que voulez-vous faire ?</h2>
+<% if current_user.participations.exists?(maraude: @maraude) %>
+  <%= link_to "Je ne participe plus", maraude_participation_path(@maraude, current_user.participations.find_by(maraude: @maraude)),
+     data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" },
+     class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "Je participe", maraude_participations_path(@maraude),
+     data: { turbo_method: :post },
+     class: "btn btn-primary" %>
+<% end %>
+
+
+  <%= link_to dashboard_path, class: "btn btn-primary mt-4", aria: { label: "Revenir à mon tableau de bord" } do %>
+  <i class="fas fa-home"></i>
+<% end %>
