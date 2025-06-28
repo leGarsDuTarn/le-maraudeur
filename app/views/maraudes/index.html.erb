@@ -3,7 +3,7 @@
   <% if @maraudes.any? %>
     <ul>
       <% @maraudes.each do |maraude| %>
-        <li><%= maraude.place %> - <%= maraude.action %> - <%= maraude.date %> à <%= maraude.hour.strftime("%H:%M") %> créer par <%= maraude.user.email %>
+        <li><%= maraude.place %> - <%= maraude.action %> - <%= maraude.date %> à <%= maraude.hour.strftime("%H:%M") %> créer par <%= maraude.user.username %>
         <%= link_to maraude_path(maraude), class: "btn btn-primary btn-sm", aria: { label: "Plus de détails pour cette maraude"} do %>
           <i class="fas fa-plus"></i>
           détails
