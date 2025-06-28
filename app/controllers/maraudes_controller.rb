@@ -1,5 +1,5 @@
 class MaraudesController < ApplicationController
-  before_action :set_maraude, only: [show, edit, update, destroy]
+  before_action :set_maraude, only: [:show, :edit, :update, :destroy]
   def index
     @maraudes = Maraude.all
   end
@@ -20,7 +20,7 @@ class MaraudesController < ApplicationController
     @maraude = Maraude.new(maraude_params)
     @maraude.user = current_user
       if @maraude.save
-        redirect_to @maraude, notice: 'La maraude a été créée avec succès.'
+        redirect_to dashboard_path, notice: 'La maraude a été créée avec succès.'
       else
         render :new, status: :unprocessable_entity
       end
@@ -28,7 +28,7 @@ class MaraudesController < ApplicationController
 
   def update
     if @maraude.update(maraude_params)
-      redirect_to @maraude, notice: 'La maraude a été modifié avec succès.', status: :see_other
+      redirect_to dashboard_path, notice: 'La maraude a été modifié avec succès.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,9 +36,9 @@ class MaraudesController < ApplicationController
 
   def destroy
     if @maraude.destroy
-      redirect_to maraudes_url, notice: 'La maraude a été supprimé avec succès.'
+      redirect_to dashboard_path, notice: 'La maraude a été supprimé avec succès.'
     else
-      redirect_to @maraude, alert: "La maraude n'a pas pu être supprimée."
+      redirect_to dashboard_path, alert: "La maraude n'a pas pu être supprimée."
     end
   end
 

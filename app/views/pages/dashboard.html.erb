@@ -1,9 +1,24 @@
 <h1>Bienvenue <%= current_user.email %></h1>
-<h2>Mes maraudes créées</h2>
-<% if current_user.maraudes.any? %>
+
+<h2>Mes participations</h2>
+
+<h2>Mes maraudes</h2>
+<% if current_user.maraudes_created.any? %>
   <ul>
-    current.user.each do |maraude|
-      <li><%= maraude.place %> - <%= maraude.date %> à <%= maraude.hour.strftime("%H:%M") %></li>
+  <% current_user.maraudes_created.each do |maraude| %>
+      <li><%= maraude.place %> - <%= maraude.date %> à <%= maraude.hour.strftime("%H:%M") %>
+      <%= link_to edit_maraude_path(maraude), class: "btn btn-primary", aria: { label: "Modifier cette maraude" } do %>
+        <i class="fas fa-pen"></i>
+      <% end %>
+
+      <%= link_to maraude_path(maraude), class: "btn btn-danger", aria: { label: "Supprimer cette maraude" },
+      data: {turbo_method: :delete,
+      turbo_confirm: "Êtes-vous sur ?"} do  %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+
+
+      </li>
     <% end %>
   </ul>
 <% else %>
@@ -11,3 +26,13 @@
 <% end %>
 
 <h2>Créer une nouvelle maraude</h2>
+<%= link_to new_maraude_path, class: "btn btn-primary", aria: { label: "Ajouter une maraude" } do %>
+  <i class="fas fa-plus"></i>
+<% end %>
+
+<h2>Rechercher des maraudes</h2>
+<%= link_to maraudes_path, class: "btn btn-primary", aria: { label: "Recherhcer des maraudes" } do %>
+  <i class="fas fa-search"></i>
+<% end %>
+
+<h2>Rechercher des associations</h2>
