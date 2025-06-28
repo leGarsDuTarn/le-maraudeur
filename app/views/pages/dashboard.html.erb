@@ -1,6 +1,20 @@
 <h1>Bienvenue <%= current_user.email %></h1>
 
 <h2>Mes participations</h2>
+<% if current_user.participations.any? %>
+  <ul>
+    <% current_user.participations.each do |participate| %>
+    <li><%= participate.maraude.place %>
+    <%= link_to maraude_path(participate.maraude), class: "btn btn-primary", aria: { label: "Voir la fiche de cette maraude" } do %>
+    <i class="fas fa-eye"></i>
+    <% end %>
+    </li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>Vous n'avez aucune participationsactuellement</p>
+  <% end %>
+
 
 <h2>Mes maraudes</h2>
 <% if current_user.maraudes_created.any? %>
