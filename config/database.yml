@@ -78,7 +78,4 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: le_maraudeur_production
-  username: le_maraudeur
-  password: <%= ENV["LE_MARAUDEUR_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
